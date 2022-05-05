@@ -1,0 +1,3 @@
+### Comandos ###
+cdk list
+cdk deploy Vpc
