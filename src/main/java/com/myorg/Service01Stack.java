@@ -29,6 +29,7 @@ public class Service01Stack extends Stack {
                 .memoryLimitMiB(1024)
                 .desiredCount(2)
                 .listenerPort(8080)
+                .assignPublicIp(true)
                 .taskImageOptions(
                         ApplicationLoadBalancedTaskImageOptions.builder()
                                 .containerName("aws_project01")
