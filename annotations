@@ -1,3 +1,4 @@
 ### Comandos ###
 cdk list
 cdk deploy Vpc
+cdk diff
