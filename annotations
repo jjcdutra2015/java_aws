@@ -2,3 +2,4 @@
 cdk list
 cdk deploy Vpc
 cdk diff
+cdk destroy Vpc
