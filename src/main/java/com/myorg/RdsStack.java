@@ -33,7 +33,7 @@ public class RdsStack extends Stack {
                         .build()))
                 .vpc(vpc)
                 .credentials(Credentials.fromUsername("admin", CredentialsFromUsernameOptions.builder()
-                        .password(SecretValue.plainText(databasePassword.getValueAsString()))
+                        .password(SecretValue.unsafePlainText(databasePassword.getValueAsString()))
                         .build()))
                 .instanceType(InstanceType.of(InstanceClass.BURSTABLE2, InstanceSize.MICRO))
                 .multiAz(false)
