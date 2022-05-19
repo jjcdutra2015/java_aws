@@ -6,6 +6,9 @@ import javax.persistence.*;
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"code"})})
 public class Product {
 
+    public Product() {
+    }
+
     public Product(long id, String name, String model, String code, float price) {
         this.id = id;
         this.name = name;
