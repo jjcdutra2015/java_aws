@@ -9,12 +9,13 @@ public class Product {
     public Product() {
     }
 
-    public Product(long id, String name, String model, String code, float price) {
+    public Product(long id, String name, String model, String code, float price, String color) {
         this.id = id;
         this.name = name;
         this.model = model;
         this.code = code;
         this.price = price;
+        this.color = color;
     }
 
     @Id
@@ -31,6 +32,9 @@ public class Product {
     private String code;
 
     private float price;
+
+    @Column(length = 12)
+    private String color;
 
     public long getId() {
         return id;
@@ -50,5 +54,9 @@ public class Product {
 
     public float getPrice() {
         return price;
+    }
+
+    public String getColor() {
+        return color;
     }
 }

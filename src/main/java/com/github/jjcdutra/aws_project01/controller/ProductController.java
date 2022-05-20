@@ -42,7 +42,7 @@ public class ProductController {
     @PutMapping("/id")
     public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable Long id) {
         if (productRepository.existsById(id)) {
-            product = new Product(id, product.getName(), product.getModel(), product.getCode(), product.getPrice());
+            product = new Product(id, product.getName(), product.getModel(), product.getCode(), product.getPrice(), product.getColor());
 
             Product productUpdated = productRepository.save(product);
 
