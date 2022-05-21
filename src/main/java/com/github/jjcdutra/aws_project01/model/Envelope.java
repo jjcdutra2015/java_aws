@@ -1,19 +1,21 @@
 package com.github.jjcdutra.aws_project01.model;
 
+import com.github.jjcdutra.aws_project01.enums.EventType;
+
 public class Envelope {
 
-    private String eventType;
+    private EventType eventType;
     private String data;
 
     public Envelope() {
     }
 
-    public Envelope(String eventType, String data) {
+    public Envelope(EventType eventType, String data) {
         this.eventType = eventType;
         this.data = data;
     }
 
-    public String getEventType() {
+    public EventType getEventType() {
         return eventType;
     }
 

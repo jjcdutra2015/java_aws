@@ -1,6 +1,6 @@
 package com.github.jjcdutra.aws_project01.enums;
 
-public enum EnumType {
+public enum EventType {
     PRODUCT_CREATED,
     PRODUCT_UPDATED,
     PRODUCT_DELETED

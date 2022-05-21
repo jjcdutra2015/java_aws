@@ -1,7 +1,9 @@
 package com.github.jjcdutra.aws_project01.controller;
 
+import com.github.jjcdutra.aws_project01.enums.EventType;
 import com.github.jjcdutra.aws_project01.model.Product;
 import com.github.jjcdutra.aws_project01.repository.ProductRepository;
+import com.github.jjcdutra.aws_project01.service.ProductPublish;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,11 @@ import java.util.Optional;
 public class ProductController {
 
     private ProductRepository productRepository;
+    private ProductPublish productPublish;
 
-    public ProductController(ProductRepository productRepository) {
+    public ProductController(ProductRepository productRepository, ProductPublish productPublish) {
         this.productRepository = productRepository;
+        this.productPublish = productPublish;
     }
 
     @GetMapping
@@ -36,6 +40,7 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
         Product productCreated = productRepository.save(product);
+        productPublish.publishProductEvent(productCreated, EventType.PRODUCT_CREATED, "matilde");
         return new ResponseEntity<>(productCreated, HttpStatus.CREATED);
     }
 
@@ -45,6 +50,8 @@ public class ProductController {
             product = new Product(id, product.getName(), product.getModel(), product.getCode(), product.getPrice(), product.getColor());
 
             Product productUpdated = productRepository.save(product);
+
+            productPublish.publishProductEvent(productUpdated, EventType.PRODUCT_UPDATED, "doralice");
 
             return new ResponseEntity<>(productUpdated, HttpStatus.OK);
         } else {
@@ -59,6 +66,8 @@ public class ProductController {
             Product product = optProduct.get();
 
             productRepository.delete(product);
+
+            productPublish.publishProductEvent(product, EventType.PRODUCT_DELETED, "hannah");
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
