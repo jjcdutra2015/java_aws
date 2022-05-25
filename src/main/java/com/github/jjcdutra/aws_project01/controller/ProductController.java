@@ -24,6 +24,7 @@ public class ProductController {
 
     @GetMapping
     public Iterable<Product> findAll() {
+        productPublish.publishProductEvent(new Product(), EventType.PRODUCT_CREATED, "busca");
         return productRepository.findAll();
     }
 

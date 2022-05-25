@@ -16,29 +16,28 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 @Profile("local")
 public class SnsCreate {
+    private static final Logger LOG = LoggerFactory.getLogger(
+            SnsCreate.class);
 
-    private static final Logger LOG = LoggerFactory.getLogger(SnsCreate.class);
+    final private String productEventsTopic;
+    final private AmazonSNS snsClient;
 
-    private final AmazonSNS snsClient;
-    private final String productEventsTopic;
+    @Bean
+    public AmazonSNS snsClient() {
+        return this.snsClient;
+    }
 
     public SnsCreate() {
         this.snsClient = AmazonSNSClient.builder()
-                .withEndpointConfiguration(new AwsClientBuilder
-                        .EndpointConfiguration("http://localhost:4566",
-                        Regions.US_EAST_1.getName()))
+                .withEndpointConfiguration(
+                        new AwsClientBuilder.EndpointConfiguration("http://localhost:4566",
+                                Regions.US_EAST_1.getName()))
                 .withCredentials(new DefaultAWSCredentialsProviderChain())
                 .build();
 
         CreateTopicRequest createTopicRequest = new CreateTopicRequest("product-events");
         this.productEventsTopic = this.snsClient.createTopic(createTopicRequest).getTopicArn();
-
         LOG.info("SNS topic ARN: {}", this.productEventsTopic);
-    }
-
-    @Bean
-    public AmazonSNS snsClient() {
-        return this.snsClient;
     }
 
     @Bean(name = "productEventsTopic")

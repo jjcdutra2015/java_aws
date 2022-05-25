@@ -23,9 +23,6 @@ public class ProductPublish {
     private Topic productEventsTopic;
     private ObjectMapper objectMapper;
 
-    public ProductPublish() {
-    }
-
     public ProductPublish(AmazonSNS snsClient, Topic productEventsTopic, ObjectMapper objectMapper) {
         this.snsClient = snsClient;
         this.productEventsTopic = productEventsTopic;
